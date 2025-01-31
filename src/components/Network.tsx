@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { resumeData } from "../utils/resumeData";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { 
@@ -59,72 +60,128 @@ const NetworkTab = () => {
     {
       id: "1",
       method: "GET",
-      url: "/api/profile",
+      url: "/api/profile/contact",
       status: 200,
       type: "fetch",
-      size: "1.2 KB",
+      size: `${JSON.stringify(resumeData.contact).length} B`,
       time: {
         queueing: 10,
         waiting: 20,
-        receiving: 103,
-        total: 133
+        receiving: 50,
+        total: 80
       },
       startTime: 0,
       initiator: "fetch",
       priority: "High",
-      remoteAddress: "localhost:3000",
+      remoteAddress: "portfolio-api.vercel.app",
       requestHeaders: {
         "Accept": "application/json",
         "User-Agent": "Chrome/121.0.0.0"
       },
       responseHeaders: {
         "Content-Type": "application/json",
-        "Cache-Control": "no-cache"
-      }
+        "Cache-Control": "max-age=3600"
+      },
+      responseBody: JSON.stringify(resumeData.contact, null, 2)
     },
     {
       id: "2",
       method: "GET",
-      url: "/api/projects",
+      url: "/api/profile/skills",
       status: 200,
-      type: "xhr",
-      size: "4.5 KB",
-      time: {
-        queueing: 15,
-        waiting: 45,
-        receiving: 200,
-        total: 260
-      },
-      startTime: 50,
-      initiator: "xhr",
-      priority: "High",
-      remoteAddress: "localhost:3000",
-      requestHeaders: {
-        "Accept": "application/json",
-        "User-Agent": "Chrome/121.0.0.0"
-      },
-      responseHeaders: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache"
-      }
-    },
-    {
-      id: "3",
-      method: "POST",
-      url: "/api/contact",
-      status: 201,
       type: "fetch",
-      size: "0.8 KB",
+      size: `${JSON.stringify(resumeData.skills).length} B`,
       time: {
         queueing: 5,
         waiting: 30,
-        receiving: 59,
-        total: 94
+        receiving: 85,
+        total: 120
       },
-      startTime: 150,
+      startTime: 100,
       initiator: "fetch",
       priority: "High",
-      remoteAddress: "localhost:3000",
+      remoteAddress: "portfolio-api.vercel.app",
+      requestHeaders: {
+        "Accept": "application/json",
+        "User-Agent": "Chrome/121.0.0.0"
+      },
+      responseHeaders: {
+        "Content-Type": "application/json",
+        "Cache-Control": "max-age=3600"
+      },
+      responseBody: JSON.stringify(resumeData.skills, null, 2)
+    },
+    {
+      id: "3",
+      method: "GET",
+      url: "/api/profile/experience",
+      status: 200,
+      type: "fetch",
+      size: `${JSON.stringify(resumeData.workExperience).length} B`,
+      time: {
+        queueing: 8,
+        waiting: 45,
+        receiving: 97,
+        total: 150
+      },
+      startTime: 250,
+      initiator: "fetch",
+      priority: "High",
+      remoteAddress: "portfolio-api.vercel.app",
+      requestHeaders: {
+        "Accept": "application/json",
+        "User-Agent": "Chrome/121.0.0.0"
+      },
+      responseHeaders: {
+        "Content-Type": "application/json",
+        "Cache-Control": "max-age=3600"
+      },
+      responseBody: JSON.stringify(resumeData.workExperience, null, 2)
+    },
+    {
+      id: "4",
+      method: "GET",
+      url: "/api/profile/projects",
+      status: 200,
+      type: "fetch",
+      size: `${JSON.stringify(resumeData.projects).length} B`,
+      time: {
+        queueing: 12,
+        waiting: 60,
+        receiving: 128,
+        total: 200
+      },
+      startTime: 400,
+      initiator: "fetch",
+      priority: "High",
+      remoteAddress: "portfolio-api.vercel.app",
+      requestHeaders: {
+        "Accept": "application/json",
+        "User-Agent": "Chrome/121.0.0.0"
+      },
+      responseHeaders: {
+        "Content-Type": "application/json",
+        "Cache-Control": "max-age=3600"
+      },
+      responseBody: JSON.stringify(resumeData.projects, null, 2)
+    },
+    {
+      id: "5",
+      method: "POST",
+      url: "/api/profile/contact-form",
+      status: 201,
+      type: "fetch",
+      size: "234 B",
+      time: {
+        queueing: 5,
+        waiting: 180,
+        receiving: 15,
+        total: 200
+      },
+      startTime: 600,
+      initiator: "fetch",
+      priority: "High",
+      remoteAddress: "portfolio-api.vercel.app",
       requestHeaders: {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -134,8 +191,14 @@ const NetworkTab = () => {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache"
       },
-      requestBody: '{"email":"test@example.com","message":"Hello"}',
-      responseBody: '{"status":"success"}'
+      requestBody: JSON.stringify({
+        email: "visitor@example.com",
+        message: "Hi, I'd like to discuss a project opportunity."
+      }, null, 2),
+      responseBody: JSON.stringify({
+        status: "success",
+        message: "Thank you for your message. I'll get back to you soon!"
+      }, null, 2)
     }
   ]);
 
